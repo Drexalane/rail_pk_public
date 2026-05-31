@@ -6,6 +6,8 @@ PK superposé au-dessus de toute application (PDF, navigation…). Usage en cabi
 
 ## Téléchargement
 
+Site web : https://drexalane.github.io/rail_pk_public/
+
 APK dans les [Releases](https://github.com/Drexalane/rail_pk_public/releases).
 
 ## Installation
