@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://drexalane.github.io/rail_pk_public/sitemap.xml
