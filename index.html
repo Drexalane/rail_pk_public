@@ -22,6 +22,7 @@
     .card h2 { color: #e94560; margin-bottom: 1rem; }
     .download-btn { display: inline-block; background: #e94560; color: #fff; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; font-size: 1.2rem; font-weight: bold; margin: 1rem 0; transition: background 0.2s; }
     .download-btn:hover { background: #c73a52; }
+    .download-count { display: block; color: #a0a0b0; font-size: 0.9rem; margin-top: 0.3rem; }
     ul { padding-left: 1.5rem; }
     li { margin-bottom: 0.5rem; }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
@@ -29,6 +30,7 @@
     .feature .icon { font-size: 2rem; margin-bottom: 0.5rem; }
     footer { text-align: center; padding: 2rem; color: #606070; font-size: 0.9rem; }
     a { color: #e94560; }
+    .loading { opacity: 0.5; }
   </style>
 </head>
 <body>
@@ -36,6 +38,7 @@
     <h1>🚄 Rail PK</h1>
     <p>Overlay Android affichant le point kilométrique (PK) ferroviaire en temps réel sur toutes les lignes SNCF</p>
     <a class="download-btn" href="https://github.com/Drexalane/rail_pk_public/releases/latest/download/app-release.apk">📥 Télécharger l'APK</a>
+    <span class="download-count" id="dl-count">…</span>
   </header>
 
   <main>
@@ -97,5 +100,24 @@
   <footer>
     <p>Rail PK — <a href="https://github.com/Drexalane/rail_pk_public">GitHub</a> — Licence MIT — © 2026 Drexalane</p>
   </footer>
+
+  <script>
+    (async function() {
+      const el = document.getElementById('dl-count');
+      try {
+        const resp = await fetch('https://api.github.com/repos/Drexalane/rail_pk_public/releases/latest');
+        if (!resp.ok) throw new Error('API error');
+        const release = await resp.json();
+        let total = 0;
+        for (const asset of release.assets) {
+          total += asset.download_count || 0;
+        }
+        el.textContent = total + ' téléchargement' + (total !== 1 ? 's' : '');
+        el.classList.remove('loading');
+      } catch(e) {
+        el.textContent = '';
+      }
+    })();
+  </script>
 </body>
 </html>
