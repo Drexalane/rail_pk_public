@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rail PK — Overlay ferroviaire Android</title>
-  <meta name="description" content="Rail PK affiche le point kilométrique (PK) SNCF en temps réel en superposition par-dessus toute application Android. Usage cabine de conduite. 100% offline, pas de collecte de données.">
-  <meta name="keywords" content="rail pk, overlay ferroviaire, point kilometrique, android, SNCF, cabine conduite, pk temps reel">
+  <title>Rail PK — Votre position sur les rails, en direct</title>
+  <meta name="description" content="Application gratuite pour voir sa position kilométrique en direct sur une ligne SNCF. Fonctionne sans Internet, ne collecte rien.">
+  <meta name="keywords" content="rail pk, point kilometrique, android, SNCF, cabine conduite, pk temps reel, position rails">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Rail PK — Overlay ferroviaire Android">
-  <meta property="og:description" content="PK SNCF en temps réel en superposition Android. 100% offline, gratuit.">
+  <meta property="og:title" content="Rail PK — Votre position sur les rails, en direct">
+  <meta property="og:description" content="Application gratuite pour voir sa position kilométrique en direct sur une ligne SNCF. Fonctionne sans Internet, ne collecte rien.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <style>
@@ -23,7 +23,7 @@
     .download-btn { display: inline-block; background: #e94560; color: #fff; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; font-size: 1.2rem; font-weight: bold; margin: 1rem 0; transition: background 0.2s; }
     .download-btn:hover { background: #c73a52; }
     .download-count { display: block; color: #a0a0b0; font-size: 0.9rem; margin-top: 0.3rem; }
-    ul { padding-left: 1.5rem; }
+    ul, ol { padding-left: 1.5rem; }
     li { margin-bottom: 0.5rem; }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
     .feature { background: #0f3460; padding: 1.5rem; border-radius: 6px; text-align: center; }
@@ -31,69 +31,122 @@
     footer { text-align: center; padding: 2rem; color: #606070; font-size: 0.9rem; }
     a { color: #e94560; }
     .loading { opacity: 0.5; }
+    .display-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; background: #0f3460; padding: 1rem 1.5rem; border-radius: 6px; }
+    .display-item .emoji { font-size: 1.8rem; min-width: 2.5rem; text-align: center; }
+    .display-item .desc { font-size: 0.85rem; color: #a0a0b0; }
+    .display-item strong { font-size: 1.1rem; color: #fff; display: block; margin-bottom: 0.2rem; }
+    .compat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .compat-yes, .compat-no { padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; }
+    .compat-yes { background: #0f3460; }
+    .compat-no { background: #2a1a2e; color: #806070; font-style: italic; }
+    .warning-box { background: #2a1a2e; border-left: 4px solid #e94560; border-radius: 0 8px 8px 0; padding: 1rem 1.5rem; font-size: 0.9rem; color: #a0a0b0; }
   </style>
 </head>
 <body>
   <header>
     <h1>🚄 Rail PK</h1>
-    <p>Overlay Android affichant le point kilométrique (PK) ferroviaire en temps réel sur toutes les lignes SNCF</p>
-    <a class="download-btn" href="https://github.com/Drexalane/rail_pk_public/releases/latest/download/app-release.apk">📥 Télécharger l'APK</a>
+    <p>Votre position sur les rails, en direct</p>
+    <a class="download-btn" href="https://github.com/Drexalane/rail_pk_public/releases/latest/download/app-release.apk">📥 Télécharger</a>
     <span class="download-count" id="dl-count">…</span>
   </header>
 
   <main>
     <div class="card">
-      <h2>🔧 Comment ça marche</h2>
-      <p>Rail PK utilise le GPS de votre appareil et le référentiel officiel des points kilométriques SNCF pour afficher le PK en superposition par-dessus n'importe quelle application — PDF d'aide à la conduite, navigation, etc.</p>
+      <h2>🎯 À quoi ça sert ?</h2>
+      <p>Quand vous conduisez un train, vous devez savoir <strong>exactement où vous êtes sur la ligne</strong>. Rail PK affiche cette information en direct sur votre écran, en superposition par-dessus votre document de conduite — ou n'importe quelle autre application.</p>
+      <p style="margin-top:0.75rem">Lancez l'application, appuyez sur Démarrer, et c'est tout. Le reste se fait automatiquement.</p>
+    </div>
+
+    <div class="card">
+      <h2>👁️ Ce que vous voyez à l'écran</h2>
+      <div class="display-item">
+        <span class="emoji">📍</span>
+        <div>
+          <strong>Le point kilométrique (PK)</strong>
+          <span class="desc">Votre position exacte sur la ligne, en grand et bien lisible — par exemple <em>455.5</em></span>
+        </div>
+      </div>
+      <div class="display-item">
+        <span class="emoji">🔢</span>
+        <div>
+          <strong>Le code ligne</strong>
+          <span class="desc">Le numéro de la ligne sur laquelle vous roulez — par exemple <em>172000</em></span>
+        </div>
+      </div>
+      <div class="display-item">
+        <span class="emoji">⏱️</span>
+        <div>
+          <strong>La vitesse moyenne</strong>
+          <span class="desc">Votre allure depuis le départ</span>
+        </div>
+      </div>
+      <div class="display-item">
+        <span class="emoji">📏</span>
+        <div>
+          <strong>La distance parcourue</strong>
+          <span class="desc">Le chemin total depuis que vous avez appuyé sur Démarrer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>📱 Appareils compatibles</h2>
+      <div class="compat-grid">
+        <div class="compat-yes">✅ Tablettes Android <span style="color:#a0a0b0;font-size:0.85rem">(Galaxy Tab, Lenovo Tab, etc.)</span></div>
+        <div class="compat-yes">✅ Téléphones Android <span style="color:#a0a0b0;font-size:0.85rem">(Samsung Galaxy, Google Pixel, etc.)</span></div>
+        <div class="compat-yes">✅ Android 5.0 ou plus récent</div>
+        <div class="compat-yes">✅ GPS intégré obligatoire</div>
+        <div class="compat-no">❌ iPhone et iPad — non compatible</div>
+      </div>
+      <p style="margin-top:1rem;font-size:0.85rem;color:#a0a0b0">L'application a été testée sur Samsung Galaxy Tab A9+ et Google Pixel 10.</p>
     </div>
 
     <div class="features">
       <div class="feature">
         <div class="icon">📡</div>
-        <strong>100% offline</strong>
-        <p style="font-size:0.9rem;color:#a0a0b0">Aucune connexion Internet</p>
+        <strong>100 % hors ligne</strong>
+        <p style="font-size:0.9rem;color:#a0a0b0">Fonctionne sans Internet, même sans réseau mobile</p>
       </div>
       <div class="feature">
         <div class="icon">🔒</div>
-        <strong>Vie privée</strong>
-        <p style="font-size:0.9rem;color:#a0a0b0">Aucune donnée collectée</p>
+        <strong>Respect de la vie privée</strong>
+        <p style="font-size:0.9rem;color:#a0a0b0">Aucune donnée collectée, rien n'est envoyé nulle part</p>
       </div>
       <div class="feature">
         <div class="icon">🗺️</div>
-        <strong>Toutes les lignes</strong>
-        <p style="font-size:0.9rem;color:#a0a0b0">Réseau ferré national complet</p>
+        <strong>Tout le réseau</strong>
+        <p style="font-size:0.9rem;color:#a0a0b0">Couverture complète du réseau ferré national</p>
       </div>
       <div class="feature">
-        <div class="icon">🪟</div>
-        <strong>Overlay flottant</strong>
-        <p style="font-size:0.9rem;color:#a0a0b0">Par-dessus toute app</p>
+        <div class="icon">🆓</div>
+        <strong>100 % gratuit</strong>
+        <p style="font-size:0.9rem;color:#a0a0b0">Pas de publicité, pas d'achat intégré</p>
       </div>
     </div>
 
     <div class="card">
-      <h2>📱 Installation</h2>
+      <h2>📥 Installation</h2>
       <ol>
-        <li><a href="https://github.com/Drexalane/rail_pk_public/releases/latest/download/app-release.apk">Télécharger l'APK</a></li>
-        <li>Autoriser les sources inconnues dans Paramètres → Sécurité</li>
-        <li>Installer l'APK</li>
-        <li>Au premier lancement, accepter les permissions (affichage par-dessus, localisation, batterie)</li>
+        <li><a href="https://github.com/Drexalane/rail_pk_public/releases/latest/download/app-release.apk">Télécharger l'application</a> (fichier APK)</li>
+        <li>Autoriser l'installation depuis des sources inconnues dans les paramètres de votre appareil (Paramètres → Sécurité)</li>
+        <li>Ouvrir le fichier téléchargé pour l'installer</li>
+        <li>Au premier lancement, accepter les trois permissions demandées : affichage par-dessus les autres apps, localisation, et batterie (pour rester actif en arrière-plan)</li>
       </ol>
     </div>
 
     <div class="card">
-      <h2>📖 Utilisation</h2>
+      <h2>👆 Utilisation</h2>
       <ol>
-        <li>Ouvrir un PDF d'aide à la conduite (Adobe Reader) — optionnel</li>
         <li>Lancer <strong>Rail PK</strong></li>
-        <li>Appuyer sur <strong>Démarrer</strong> — la fenêtre overlay apparaît</li>
-        <li>Déplacer la fenêtre par glisser-déposer, pincer pour redimensionner</li>
+        <li>Appuyer sur <strong>Démarrer</strong> — une petite fenêtre apparaît par-dessus ce qui est à l'écran</li>
+        <li>La position se met à jour automatiquement avec le GPS</li>
       </ol>
-      <p style="margin-top:1rem">La fenêtre affiche le <strong>PK</strong> en grand, le <strong>code ligne</strong>, la <strong>vitesse moyenne</strong> et la <strong>distance</strong> parcourue.</p>
+      <p style="margin-top:1rem;color:#a0a0b0">Vous pouvez déplacer la fenêtre avec le doigt, et pincer pour l'agrandir ou la réduire. La fenêtre reste visible par-dessus toutes vos applications — vous pouvez ouvrir un document de conduite, une carte, ou toute autre app.</p>
     </div>
 
-    <div class="card">
-      <h2>⚠️ Avertissement</h2>
-      <p>Aide visuelle, pas un instrument réglementaire.</p>
+    <div class="warning-box">
+      <h2 style="color:#e94560;border-bottom:none;margin-bottom:0.5rem">⚠️ À savoir</h2>
+      <p>Rail PK est une <strong>aide visuelle</strong>, pas un instrument de mesure officiel. Il ne remplace pas les équipements réglementaires du train. La précision dépend de la qualité du signal GPS de votre appareil.</p>
     </div>
   </main>
 
