@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _ColorOption('Magenta', 0xFFD900D0),
     _ColorOption('Rouge', 0xFFFF0000),
     _ColorOption('Orange', 0xFFFF6D00),
-    _ColorOption('Jaune', 0xFFFFD600),
+    _ColorOption('Jaune', 0xFF8F6620),
     _ColorOption('Vert', 0xFF00C853),
     _ColorOption('Bleu', 0xFF2962FF),
     _ColorOption('Noir', 0xFF000000),
